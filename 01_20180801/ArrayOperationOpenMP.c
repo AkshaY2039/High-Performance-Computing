@@ -2,7 +2,7 @@
 #include <time.h>
 #include <omp.h>
 
-#define size 100
+#define size 1000
 
 int main ()
 {
@@ -17,7 +17,7 @@ int main ()
 		//omp_set_num_threads (threads [p]);
 		start = omp_get_wtime (); //array operation starts here
 
-		#pragma omp parallel for num_threads(threads[p])
+		#pragma omp parallel for num_threads(threads[p]) shared (a, b, i)
 			for (i = 0; i < size; i++)
 			{
 				a[i] = (i+1)*1.0;
