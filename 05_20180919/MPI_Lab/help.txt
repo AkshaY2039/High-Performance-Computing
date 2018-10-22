@@ -1,0 +1,13 @@
+g++ -fopenmp file.cpp
+
+user - ced15i031
+pw - A**1
+scp hello.c ced15i031@172.16.1.98:
+ssh ced15i031@172.16.1.98
+mpicc -o HW filename.c
+
+qsub submit.sh
+open the result file
+qstat -a
+qdel ID
+showq
