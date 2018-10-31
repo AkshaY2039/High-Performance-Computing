@@ -118,14 +118,14 @@ int main (int argc, char *argv[])
 				sum_g = 0;
 				sum_b = 0;
 				sum_r = 0;
-		 		for (k = i - 1; k <= i + 1; k++)
+				for (k = i - 1; k <= i + 1; k++)
 					for (l = j - 1; l <= j + 1; l++)
 					{
 						sum_g += g[k][l];
 						sum_b += b[k][l];
 						sum_r += r[k][l];
 					}
-		 		c_g[i][j] = sum_g / 9;
+				c_g[i][j] = sum_g / 9;
 				c_b[i][j] = sum_b / 9;
 				c_r[i][j] = sum_r / 9;
 			}
@@ -136,5 +136,5 @@ int main (int argc, char *argv[])
 		MPI_Send (&c_b, rows * NCA, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
 		MPI_Send (&c_r, rows * NCA, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
 	}
-	 MPI_Finalize ();
+	MPI_Finalize ();
 }

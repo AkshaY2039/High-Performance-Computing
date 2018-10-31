@@ -151,5 +151,5 @@ int main (int argc, char *argv[])
 		MPI_Send (&c_b, rows * NCA, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
 		MPI_Send (&c_r, rows * NCA, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
 	}
-	 MPI_Finalize ();
+	MPI_Finalize ();
 }
