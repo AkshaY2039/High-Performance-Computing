@@ -92,7 +92,7 @@ int main (int argc, char *argv[])
 		}
 
 		// Print input and output
-		printf ("|**********INPUT**********||**********OUTPUT**********|\n");
+		printf ("|**********INPUT**********||*********OUTPUT**********|\n");
 		for (i = 0; i < ARRAY_SIZE; i++)
 		{
 			printf ("| x [%6d] = %10.2f || y [%6d] = %10.2f |\n", i, x[i], i, y[i]);
@@ -108,15 +108,16 @@ int main (int argc, char *argv[])
 		MPI_Recv (&aver_size, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD, &status);
 		MPI_Recv (&x, aver_size + 2, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD, &status);
 
-		for (i = 0; i < aver_size; i++)
+		// printf("%d %d\n", taskid, offset);
+		for (i = 1; i <= aver_size; i++)
 		{
-			y[i + offset] = (x[i-1] + x[i] + x[i+1]) / 3;
+			y[i + offset - 1] = (x[i - 1] + x[i] + x[i + 1]) / 3;
 		}
 
 		mtype = FROM_WORKER;
 		MPI_Send (&offset, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD);
 		MPI_Send (&aver_size, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD);
-		MPI_Send (&y, aver_size, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
+		MPI_Send (&y[offset], aver_size, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
 	}
 
 	MPI_Finalize ();
